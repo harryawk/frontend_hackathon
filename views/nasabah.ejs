@@ -83,16 +83,22 @@
                         <input class="uk-input uk-form-small" type="text" placeholder="Pilih File" disabled >
                     </div>
                 </div>
-                <input type="submit" class="uk-button uk-button-primary uk-align-center" value="Submit Klaim">
+                <input id="submit-button" type="submit" class="uk-button uk-button-primary uk-align-center" value="Submit Klaim">
             </form>
+            <div id="loading" class="uk-align-right" uk-spinner></div>
         </div>
 
         <p id="photo-copyright" class="uk-text-right uk-text-small">Photo by Kevin Delvecchio on Unsplash</p>
 
         <script>
             $(document).ready(function() {
+                $("#loading").hide();
                 $('#card-2').hide();
             }) 
+            $('#submit-button').on('click', function() {
+                $("#loading").show();
+            });
+
             $('#claim-button').on('click', function() {
                 $('#card-1').slideUp(function() {
                     $('#card-2').slideDown();
