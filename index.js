@@ -140,6 +140,13 @@ app.post('/ocr/request', (req, res) => {
   })
 })
 
+app.get('/nasabah', (req, res) => {
+  res.render("nasabah");
+})
+
+app.get('/perusahaan_asuransi', (req, res) => {
+  res.render("perusahaan_asuransi");
+})
 
 app.listen(app.get('port'), function () {
   console.log('Node app is running on port', app.get('port'));
