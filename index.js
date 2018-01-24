@@ -23,7 +23,7 @@ app.set('view engine', 'ejs');
 
 var fs = require('fs');
 var admin = require('firebase-admin')
-var faker = require('faker')
+var path = require('path')
 
 app.get('/', (req, res) => {
 
@@ -34,10 +34,50 @@ app.get('/', (req, res) => {
   })
 })
 
+app.get('/ocr/collect', (req, res) => {
+  res.render('upload')
+})
+
 app.post('/ocr/test', (req, res) => {
 
   var reqJson = req.body
 
+  var form  = new formidable.IncomingForm()
+
+  form.parse(req, (err, fields, files) => {
+    var old_path = files.the_file.path
+    var file_size = files.the_file.size
+    var file_ext = files.the_file.name.split('.').pop()
+    var index = old_path.lastIndexOf('\\') + 1
+    var file_name = old_path.substr(index)
+    console.log(old_path)
+    console.log(file_name)
+    var new_path = path.join(__dirname, 'public\\uploads', file_name + '.' + file_ext)
+    console.log(new_path)
+
+    fs.readFile(old_path, (err, data) => {
+      // console.log("data_1")
+      // console.log(data)
+      fs.writeFile(new_path, data, (err) => {
+        // console.log("data_2")
+        // console.log(data)
+        // fs.unlink(old_path, (err) => {
+          if (err) {
+            console.log("err")
+            console.log(err)
+            res.status(500).json({
+              success: false,
+              err: err
+            })
+          }
+          else {
+
+            res.status(200).json({success: true})
+          }
+        // })
+      })
+    })
+  })
   
 })
 
