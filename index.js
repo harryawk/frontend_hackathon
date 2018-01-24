@@ -22,8 +22,8 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 var fs = require('fs');
-var admin = require('firebase-admin')
-var faker = require('faker')
+// var admin = require('firebase-admin')
+// var faker = require('faker')
 
 app.get('/', (req, res) => {
 
@@ -41,6 +41,13 @@ app.post('/ocr/test', (req, res) => {
   
 })
 
+app.get('/nasabah', (req, res) => {
+  res.render("nasabah");
+})
+
+app.get('/perusahaan_asuransi', (req, res) => {
+  res.render("perusahaan_asuransi");
+})
 
 app.listen(app.get('port'), function () {
   console.log('Node app is running on port', app.get('port'));
