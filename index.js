@@ -239,6 +239,14 @@ app.get('/perusahaan_asuransi', (req, res) => {
   res.render("perusahaan_asuransi");
 })
 
+app.get('/nasabah_konfirmasi_berhasil', (req, res) => {
+  res.render("nasabah_konfirmasi_berhasil");
+})
+
+app.get('/nasabah_konfirmasi_gagal', (req, res) => {
+  res.render("nasabah_konfirmasi_gagal");
+})
+
 app.listen(app.get('port'), function () {
   console.log('Node app is running on port', app.get('port'));
 });
